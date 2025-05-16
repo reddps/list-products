@@ -23,14 +23,14 @@ if (isset($_FILES['file'])) {
         }
     }
     if ($success > 0) {
-        header('Location: index.php?upload=success&count=' . $success);
+        header('Location: envio.php?upload=success&count=' . $success);
         exit;
     } else {
-        header('Location: index.php?upload=fail');
+        header('Location: envio.php?upload=fail');
         exit;
     }
 } else {
-    header('Location: index.php?upload=fail');
+    header('Location: envio.php?upload=fail');
     exit;
 }
 ?>
