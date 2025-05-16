@@ -462,7 +462,7 @@
     }
     // Função para copiar link para a área de transferência
     function copyLink(link) {
-        const url = 'https://hospedagem.trindadecorp.com.br/' + link.replace(/^\/+/, '');
+        const url = location.origin + '/' + link.replace(/^\/+/, '');
         navigator.clipboard.writeText(url).then(() => {
             alert('Link copiado!');
         }, () => {

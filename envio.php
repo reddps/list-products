@@ -185,7 +185,7 @@
     </div>
     <script>
     function copyLinkUpload(link) {
-        const url = 'https://hospedagem.trindadecorp.com.br/' + link.replace(/^\/+/, '');
+        const url = location.origin + '/' + link.replace(/^\/+/, '');
         navigator.clipboard.writeText(url).then(() => {
             alert('Link copiado!');
         }, () => {
