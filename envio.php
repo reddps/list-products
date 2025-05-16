@@ -187,7 +187,7 @@
             <?php endif; ?>
             <form id="uploadForm" action="upload.php" method="post" enctype="multipart/form-data" onsubmit="return showLoading()">
                 <label for="file">Selecione um ou mais arquivos para enviar:</label>
-                <input type="file" name="file[]" id="file" required multiple />
+                <input type="file" name="file[]" id="file" required multiple accept=".jpg,.jpeg,.png,.gif,.bmp,.webp,.pdf,.txt,.mp3,.mp4,image/*,audio/mp3,video/mp4,application/pdf,text/plain" />
                 <input type="submit" value="Enviar" />
             </form>
             <div id="loadingMsg" style="display:none;text-align:center;margin-top:18px;">

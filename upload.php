@@ -12,6 +12,18 @@ if (isset($_FILES['file'])) {
             $fileTmp = $files['tmp_name'][$i];
             $fileName = basename($files['name'][$i]);
             $fileName = preg_replace('/[^a-zA-Z0-9._-]/', '_', $fileName);
+            $ext = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+            $allowed = [
+                'jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', // imagens
+                'pdf',
+                'txt',
+                'mp3',
+                'mp4'
+            ];
+            if (!in_array($ext, $allowed)) {
+                $fail++;
+                continue;
+            }
             $destPath = $uploadDir . $fileName;
             if (move_uploaded_file($fileTmp, $destPath)) {
                 $success++;
