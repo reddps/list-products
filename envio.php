@@ -136,6 +136,21 @@
             background-color: #2980b9;
         }
 
+        .spinner-loader {
+            border: 6px solid #eaf4fc;
+            border-top: 6px solid #3498db;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 8px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         @media (max-width: 600px) {
             .sidebar { width: 48px; }
             .svg-anim { width: 22px; height: 22px; }
@@ -164,23 +179,23 @@
     <div class="main-content">
         <div class="container">
             <h2>Hospedagem de Arquivos</h2>
-            <?php if (isset($_GET['upload']) && $_GET['upload'] === 'success' && isset($_FILES['file']['name'])): ?>
-                <?php
-                $fileName = basename($_FILES['file']['name']);
-                $fileName = preg_replace('/[^a-zA-Z0-9._-]/', '_', $fileName);
-                $fileUrl = 'uploads/' . $fileName;
-                ?>
+            <?php if (isset($_GET['upload']) && $_GET['upload'] === 'success'): ?>
                 <div id="uploadSuccessMsg" style="background:#eaf4fc;padding:16px 12px;border-radius:8px;margin-bottom:18px;text-align:center;">
-                    <span style="color:#219150;font-weight:600;">Arquivo enviado com sucesso!</span><br>
-                    <a href="<?php echo $fileUrl; ?>" target="_blank" style="word-break:break-all;display:block;margin:8px 0 10px 0;"><b><?php echo $fileName; ?></b></a>
-                    <button onclick="copyLinkUpload('<?php echo $fileUrl; ?>')" style="background:#27ae60;color:#fff;border:none;padding:7px 18px;border-radius:6px;font-weight:600;cursor:pointer;">Copiar link</button>
+                    <span style="color:#219150;font-weight:600;">Arquivos enviados com sucesso!</span><br>
+                    <a href="gerenciar.php" style="display:inline-block;margin-top:10px;color:#2980b9;font-weight:600;">Gerenciar arquivos enviados</a>
                 </div>
             <?php endif; ?>
-            <form action="upload.php" method="post" enctype="multipart/form-data">
+            <form id="uploadForm" action="upload.php" method="post" enctype="multipart/form-data" onsubmit="return showLoading()">
                 <label for="file">Selecione um ou mais arquivos para enviar:</label>
                 <input type="file" name="file[]" id="file" required multiple />
                 <input type="submit" value="Enviar" />
             </form>
+            <div id="loadingMsg" style="display:none;text-align:center;margin-top:18px;">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+                    <div class="spinner-loader"></div>
+                    <span style="color:#2980b9;font-weight:600;font-size:1.1rem;">Enviando arquivos...</span>
+                </div>
+            </div>
         </div>
     </div>
     <script>
@@ -191,6 +206,12 @@
         }, () => {
             alert('Não foi possível copiar o link.');
         });
+    }
+
+    function showLoading() {
+        document.getElementById('uploadForm').style.display = 'none';
+        document.getElementById('loadingMsg').style.display = 'block';
+        return true;
     }
     </script>
 </body>
