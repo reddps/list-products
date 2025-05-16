@@ -177,8 +177,8 @@
                 </div>
             <?php endif; ?>
             <form action="upload.php" method="post" enctype="multipart/form-data">
-                <label for="file">Selecione um arquivo para enviar:</label>
-                <input type="file" name="file" id="file" required />
+                <label for="file">Selecione um ou mais arquivos para enviar:</label>
+                <input type="file" name="file[]" id="file" required multiple />
                 <input type="submit" value="Enviar" />
             </form>
         </div>
